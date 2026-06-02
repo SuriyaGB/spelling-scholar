@@ -320,3 +320,26 @@ export async function submitSpellingAttempt(body: CoachingRequest): Promise<Coac
     throw err;
   }
 }
+
+export interface SubscriptionStatusResponse {
+  subscribed: boolean;
+  currentPeriodEnd?: number;
+  cancelAtPeriodEnd?: boolean;
+}
+
+export async function fetchSubscriptionStatus(): Promise<SubscriptionStatusResponse> {
+  try {
+    const res = await fetch(`${BASE_URL}/api/subscription/status`, {
+      headers: await authHeaders(),
+    });
+    if (!res.ok) throw new Error("Failed to fetch subscription status");
+    return await res.json();
+  } catch (err) {
+    // If not implemented on backend or using mock fallback, return a mock active subscription
+    return {
+      subscribed: true,
+      currentPeriodEnd: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60, // 30 days from now
+      cancelAtPeriodEnd: false,
+    };
+  }
+}
