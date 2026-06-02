@@ -10,6 +10,9 @@ Sentry.init({
   sendDefaultPii: true
 });
 
+// Expose Sentry globally so we can test it from the browser developer console
+(window as any).Sentry = Sentry;
+
 createRoot(document.getElementById("root")!).render(
   <>
     <App />
