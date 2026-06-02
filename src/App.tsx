@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/use-auth";
 import Index from "./pages/Index.tsx";
+import Privacy from "./pages/Privacy.tsx";
+import DataDeletion from "./pages/DataDeletion.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -18,6 +20,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/data-deletion" element={<DataDeletion />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
@@ -26,5 +30,6 @@ const App = () => (
     </AuthProvider>
   </QueryClientProvider>
 );
+
 
 export default App;
