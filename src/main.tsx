@@ -13,6 +13,10 @@ Sentry.init({
 // Expose Sentry globally so we can test it from the browser developer console
 (window as any).Sentry = Sentry;
 
+// Expose supabase globally for easy console debugging and session checking
+import { supabase } from "@/lib/supabase";
+(window as any).supabase = supabase;
+
 createRoot(document.getElementById("root")!).render(
   <>
     <App />
