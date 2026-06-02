@@ -28,6 +28,20 @@ import { cn } from "@/lib/utils";
 import { AuthMenu } from "@/components/AuthMenu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import beePng from "@/assets/bee.png";
+import * as Sentry from "@sentry/react";
+
+function ErrorButton() {
+  return (
+    <button
+      onClick={() => {
+        throw new Error("This is your first error!");
+      }}
+      className="px-3 py-1.5 text-xs font-semibold text-white bg-destructive hover:bg-destructive/90 rounded-lg transition-all shadow-sm active:scale-95 duration-100"
+    >
+      Break the world
+    </button>
+  );
+}
 
 const DEFAULT_PROFILE = {
   childId: "c1",
@@ -305,6 +319,7 @@ export default function Index() {
             </span>
           </button>
           <div className="flex items-center gap-1">
+            <ErrorButton />
             <AuthMenu />
             <Tooltip>
               <TooltipTrigger asChild>
